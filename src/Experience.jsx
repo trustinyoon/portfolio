@@ -1,4 +1,4 @@
-import { shaderMaterial, Text, Html, ContactShadows, PresentationControls, Float, Environment, useGLTF, Plane } from '@react-three/drei'
+import { useScroll, shaderMaterial, Text, Html, ContactShadows, PresentationControls, Float, Environment, useGLTF, Plane } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
@@ -12,10 +12,12 @@ export default function Experience()
     const { viewport } = useThree()
     const viewportWidth = viewport.width
     const viewportHeight = viewport.height
+
+
     
     return <>
 
-        <color args={ [ '#241a1a' ] } attach="background" />
+        <color args={ [ 'red' ] } attach="background" />
 
         <Environment preset="city" />
         
