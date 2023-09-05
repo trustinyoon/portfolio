@@ -4,6 +4,8 @@ import { Canvas } from '@react-three/fiber'
 import Experience from './Experience.jsx'
 import VanillaTilt from 'vanilla-tilt'
 import IntroSection from './IntroSection.jsx'
+import React, { useRef, useState, useEffect } from 'react'
+
 
 
 const root = ReactDOM.createRoot(document.querySelector('#root'))

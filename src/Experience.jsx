@@ -1,6 +1,11 @@
-import { Text, Html, ContactShadows, PresentationControls, Float, Environment, useGLTF, Plane } from '@react-three/drei'
+import { shaderMaterial, Text, Html, ContactShadows, PresentationControls, Float, Environment, useGLTF, Plane } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
-import { ShaderMaterial } from 'three'
+import vertexShader from './shaders/vertex.glsl'
+import fragmentShader from './shaders/fragment.glsl'
+import { extend } from '@react-three/fiber'
+import React, { useRef, useState, useEffect } from 'react'
+
+
 
 export default function Experience()
 {
@@ -14,8 +19,9 @@ export default function Experience()
 
         <Environment preset="city" />
         
-        <Plane args={[viewportWidth, viewportHeight, 1, 1]}> 
-            <shaderMaterial></shaderMaterial>
+        <Plane args={[viewportWidth * .8, viewportHeight * .8, 1, 1]}> 
+            {/* <ShaderGraphicMaterial/> */}
+            <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} ></shaderMaterial>
         </Plane>
 
         <ContactShadows
