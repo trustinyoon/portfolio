@@ -27,7 +27,9 @@ root.render(
                 <Scroll html style={{ width: '100%' }}>
                     <Html />
                 </Scroll>
-                <Experience />
+                <Scroll>
+                    <Experience />
+                </Scroll>
             </ScrollControls>
         </Canvas>
     </>

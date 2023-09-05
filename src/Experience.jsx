@@ -27,7 +27,7 @@ export default function Experience()
 
         <Environment preset="city" />
         
-        <Plane args={[viewportWidth * .8, viewportHeight * .8, 1, 1]}> 
+        <Plane position={[0, -.5, 0]} args={[viewportWidth * .8, viewportHeight * .8, 1, 1]}> 
             {/* <ShaderGraphicMaterial/> */}
             <shaderMaterial vertexShader={vertexShader} 
                             fragmentShader={fragmentShader} 
