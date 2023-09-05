@@ -11,12 +11,20 @@ body,
     font-family: Helvetica, sans-serif;
 }
 
+.nameContainer
+{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
+}
+
 .nameHeader
 {
-    font-size: 10rem;
-    padding-left: 2rem;
+    font-size: 15rem;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    line-height: 8rem;
+    line-height: 12rem;
+
 }
 
 .canvas
@@ -24,7 +32,7 @@ body,
     position: absolute;
     top: 0;
     left: 0;
-    width: 80%; !
+    width: 80%;
     height: 100%;
 }
 

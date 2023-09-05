@@ -1,4 +1,5 @@
 varying vec2 vUv;
+uniform float uTime;
 
 vec4 permute(vec4 x)
 {
