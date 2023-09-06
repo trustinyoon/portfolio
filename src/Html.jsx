@@ -26,6 +26,13 @@ export default function Html() {
     <div className='nameContainer'>
       <span className='titleHeader'>MULTI-DISCIPLINARY GENERALIST</span>
       <h1 className='nameHeader'>TRUSTIN</h1>
+      <div className='titlesContainer'>
+        <span>FOUNDER</span>
+        <span>GROWTH</span>
+        <span>PRODUCT</span>
+        <span>OPERATIONS</span>
+        <span>CREATIVE TECHNOLOGIST</span>
+      </div>
     </div>
     <h1 style={{ position: 'absolute', top: `100vh`, right: '20vw', fontSize: '1rem', transform: `translate3d(0,-100%,0)` }}>all</h1>
     <h1 style={{ position: 'absolute', top: '180vh', left: '10vw' }}>hail</h1>

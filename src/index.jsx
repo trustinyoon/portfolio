@@ -6,6 +6,7 @@ import VanillaTilt from 'vanilla-tilt'
 import Html from './Html.jsx'
 import React, { useRef, useState, useEffect } from 'react'
 import { ScrollControls, Scroll } from '@react-three/drei'
+import { Perf } from 'r3f-perf'
 
 
 
@@ -31,6 +32,8 @@ root.render(
                     <Experience />
                 </Scroll>
             </ScrollControls>
+
+            <Perf />
         </Canvas>
     </>
 )
