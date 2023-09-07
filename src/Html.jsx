@@ -2,8 +2,11 @@ import { useEffect } from 'react'
 import gsap from 'gsap'
 import SplitType from 'split-type'
 import React from 'react'
+import { useScroll } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber'
 
 export default function Html() {
+  const scroll = useScroll()
 
   useEffect(() => {
     const splitNameHeader = new SplitType('.nameHeader');
@@ -22,6 +25,18 @@ export default function Html() {
     };
   }, []); // Empty dependency array ensures this code runs only on mount and unmount
 
+  useFrame(() => {
+    const scrollProgress = scroll.range(0, 1 / 5)
+    console.log(scrollProgress)
+
+    // Calculate the blur value based on scrollProgress (adjust the range as needed)
+    const blurValue = gsap.utils.mapRange(0, 1, 0, 40, scrollProgress);
+
+    // Apply the blur effect to the nameContainer element
+    gsap.to('.nameContainer', { filter: `blur(${blurValue}px)` });
+
+  })
+  
   return <>
     <div className='nameContainer'>
       <span className='titleHeader'>MULTI-DISCIPLINARY GENERALIST</span>

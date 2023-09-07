@@ -18,6 +18,7 @@ body,
     justify-content: center;
     flex-direction: column;
     padding-top: 20%;
+    filter: 'blur(0px)'
 }
 
 .nameHeader

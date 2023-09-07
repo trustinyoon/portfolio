@@ -31,7 +31,7 @@ function RotatingBox({ position, rotationY, onClick, isClicked }) {
                 x: Math.PI,  // 90 degrees around the X-axis
                 z: -Math.PI / 2, // -90 degrees around the Z-axis
                 y: -Math.PI / 2,      // 180 degrees around the Y-axis
-                duration: 0.5,   // Adjust the duration as needed
+                duration: 1,   // Adjust the duration as needed
             });
 
             gsap.to(camera.position, {
@@ -73,7 +73,7 @@ function RotatingBox({ position, rotationY, onClick, isClicked }) {
             onClick={handleBoxClick}
 >
             <boxGeometry args={[.5, .03, .5]} />
-            <MeshTransmissionMaterial
+            <MeshReflectorMaterial
                 color={0xfffff0}
                 // transparent={true}
                 // opacity={1}
