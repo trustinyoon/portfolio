@@ -5,34 +5,25 @@ import fragmentShader from './shaders/fragment.glsl'
 import { extend } from '@react-three/fiber'
 import React, { useRef, useState, useEffect } from 'react'
 
-function RotatingBox({ position, rotationY }) {
+function RotatingBox({ position, rotationY, onClick, isHovered }) {
     const boxMesh = useRef()
     const { camera } = useThree();
 
 
-    const [isHovered, setIsHovered] = useState(false)
-    const [isClicked, setIsClicked] = useState(false);
+    const handleBoxClick = () => {
+        // Notify the parent component about the click
+        onClick();
+        console.log('clicked')
+    };
+
 
     const handlePointerOver = () => {
-        setIsHovered(true)
+        isHovered = true
     }
 
     const handlePointerOut = () => {
-        setIsHovered(false)
+        isHovered = false
     }
-
-    const handleBoxClick = () => {
-        if (!isClicked) {
-            // Log "clicked" once when the box is clicked
-            console.log('clicked');
-
-            // Calculate rotation to make the box face the camera
-            const rotation = Math.atan2(camera.position.x - boxMesh.current.position.x, camera.position.z - boxMesh.current.position.z);
-            boxMesh.current.rotation.y = rotation;
-        }
-        setIsClicked(!isClicked);
-
-    };
 
     useFrame(() => {
         boxMesh.current.rotation.y += .005
@@ -45,7 +36,13 @@ function RotatingBox({ position, rotationY }) {
     })
     
     return (
-        <mesh ref={boxMesh} position={position} rotation={[0, rotationY, 0]} onPointerOver={handlePointerOver} onPointerOut={handlePointerOut} onClick={handleBoxClick}
+        <mesh 
+            ref={boxMesh} 
+            position={position} 
+            rotation={[0, rotationY, 0]} 
+            onPointerOver={handlePointerOver} 
+            onPointerOut={handlePointerOut} 
+            onClick={handleBoxClick}
 >
             <boxGeometry args={[.5, .03, .5]} />
             <MeshTransmissionMaterial
@@ -67,10 +64,20 @@ export default function Experience()
     const viewportWidth = viewport.width
     const viewportHeight = viewport.height
 
-    const material = useRef()
     const numBoxes = 5;
     const spacing = 0.07;
 
+    const [clickedBox, setClickedBox] = useState(null);
+
+    const handleBoxClick = (index) => {
+        if (clickedBox === index) {
+            // Clicked the same box again, so unclick it
+            setClickedBox(null);
+        } else {
+            // Clicked a different box, so set it as clicked
+            setClickedBox(index);
+        }
+    };
 
     useFrame(({ clock }) => {
         // material.current.uniforms.uTime.value = clock.getElapsedTime()
@@ -89,6 +96,8 @@ export default function Experience()
                 key={index}
                 position={[0, -0.5 - (index * (spacing)) - 0.25, 0]}
                 rotationY={index * 0.08}
+                isHovered={false}
+                onClick={() => handleBoxClick(index)}
             />
         ))}
 
