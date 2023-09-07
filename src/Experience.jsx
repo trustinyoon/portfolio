@@ -4,8 +4,9 @@ import vertexShader from './shaders/vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
 import { extend } from '@react-three/fiber'
 import React, { useRef, useState, useEffect } from 'react'
+import { gsap } from 'gsap'
 
-function RotatingBox({ position, rotationY, onClick, isHovered }) {
+function RotatingBox({ position, rotationY, onClick, isClicked }) {
     const boxMesh = useRef()
     const { camera } = useThree();
 
@@ -17,20 +18,47 @@ function RotatingBox({ position, rotationY, onClick, isHovered }) {
     };
 
 
-    const handlePointerOver = () => {
-        isHovered = true
-    }
+    useEffect(() => {
+        if (isClicked) {
+            // Calculate the angle to make the box face the camera
+            const angleToCamera = Math.atan2(
+                camera.position.z - boxMesh.current.position.z,
+                camera.position.x - boxMesh.current.position.x
+            );
 
-    const handlePointerOut = () => {
-        isHovered = false
-    }
+            // Use GSAP to smoothly rotate the box
+            gsap.to(boxMesh.current.rotation, {
+                x: Math.PI,  // 90 degrees around the X-axis
+                z: -Math.PI / 2, // -90 degrees around the Z-axis
+                y: -Math.PI / 2,      // 180 degrees around the Y-axis
+                duration: 0.5,   // Adjust the duration as needed
+            });
+
+            gsap.to(camera.position, {
+                z: .5,
+                duration: 0.5,
+            });
+
+        } else {
+            // Reset the box to its original rotation
+            gsap.to(boxMesh.current.rotation, {
+                x: 0,
+                z: 0,
+                y: 0,
+                duration: 0.5, // Adjust the duration as needed
+            });
+
+            gsap.to(camera.position, {
+                z: 1,
+                duration: 0.5,
+            })
+        }
+    }, [isClicked, camera]);
+
 
     useFrame(() => {
-        boxMesh.current.rotation.y += .005
-
-        if (isHovered) {
-            boxMesh.current.rotation.y += .01
-            console.log('hovered')
+        if (!isClicked) {
+            boxMesh.current.rotation.y += .005
         }
 
     })
@@ -40,8 +68,8 @@ function RotatingBox({ position, rotationY, onClick, isHovered }) {
             ref={boxMesh} 
             position={position} 
             rotation={[0, rotationY, 0]} 
-            onPointerOver={handlePointerOver} 
-            onPointerOut={handlePointerOut} 
+            // onPointerOver={handlePointerOver} 
+            // onPointerOut={handlePointerOut} 
             onClick={handleBoxClick}
 >
             <boxGeometry args={[.5, .03, .5]} />
@@ -96,7 +124,7 @@ export default function Experience()
                 key={index}
                 position={[0, -0.5 - (index * (spacing)) - 0.25, 0]}
                 rotationY={index * 0.08}
-                isHovered={false}
+                isClicked={clickedBox === index}
                 onClick={() => handleBoxClick(index)}
             />
         ))}
