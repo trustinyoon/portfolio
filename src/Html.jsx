@@ -27,7 +27,7 @@ export default function Html() {
 
   useFrame(() => {
     const scrollProgress = scroll.range(0, 1 / 5)
-    console.log(scrollProgress)
+    // console.log(scrollProgress)
 
     // Calculate the blur value based on scrollProgress (adjust the range as needed)
     const blurValue = gsap.utils.mapRange(0, 1, 0, 40, scrollProgress);

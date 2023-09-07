@@ -14,7 +14,7 @@ function RotatingBox({ position, rotationY, onClick, isClicked }) {
     const handleBoxClick = () => {
         // Notify the parent component about the click
         onClick();
-        console.log('clicked')
+        // console.log('clicked')
     };
 
 
@@ -31,7 +31,7 @@ function RotatingBox({ position, rotationY, onClick, isClicked }) {
                 x: Math.PI,  // 90 degrees around the X-axis
                 z: -Math.PI / 2, // -90 degrees around the Z-axis
                 y: -Math.PI / 2,      // 180 degrees around the Y-axis
-                duration: 1,   // Adjust the duration as needed
+                duration: .5,   // Adjust the duration as needed
             });
 
             gsap.to(camera.position, {
